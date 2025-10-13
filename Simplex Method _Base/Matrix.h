@@ -3,7 +3,6 @@
 
 class Matrix{
 private:
-	int rest, vars;
 	int rows, cols;
 	std::string objt;
 
@@ -11,11 +10,21 @@ private:
 	double* func_Z;
 
 public:
+	int rest, vars;
 	std::string size;
 
 	//constructor
 	Matrix();
 
+	//Getters and Setters
+	double** get_matrix();
+	int cols_getter();
+	int rows_getter();
+	double Z_getter(int j);
+
+	void Z_setter(int j, double value);
+	void values_setter(int i, int j, double value);
+	
 	//user input functions
 	int restrictions();
 	int varibles();
@@ -24,8 +33,8 @@ public:
 	void print_info();
 	void print_matrix();
 
-	int get_rows();
-	int get_cols(int r);
+	int aux_rows();
+	int aux_cols(int r);
 
 	void init_matrix();
 

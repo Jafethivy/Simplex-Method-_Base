@@ -1,11 +1,11 @@
 ﻿#include <iostream>
 #include "Matrix.h"
+#include "MethodLogic.h"
 
 
 int main() {
 	Matrix m;
 	m.obj_function();
 	m.define_rest();
-	m.print_info();
-	m.print_matrix();
+	redefine_matrix(m);
 }

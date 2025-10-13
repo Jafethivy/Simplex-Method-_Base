@@ -6,8 +6,8 @@ Matrix::Matrix() {
 	rest = Matrix::restrictions();
 	vars = Matrix::varibles();
 	objt = Matrix::objetive();
-	rows = Matrix::get_rows();
-	cols = Matrix::get_cols(rows);
+	rows = Matrix::aux_rows();
+	cols = Matrix::aux_cols(rows);
 
 	values = new double* [rows];
 	func_Z = new double[vars];
@@ -16,6 +16,20 @@ Matrix::Matrix() {
 
 	size = std::to_string(rows) + "x" + std::to_string(cols);
 }
+
+//Getters and Setters
+double** Matrix::get_matrix(){ return Matrix::values; }
+int Matrix::cols_getter() { return Matrix::cols; }
+int Matrix::rows_getter() { return Matrix::rows; }
+double Matrix::Z_getter(int j) { return Matrix::func_Z[j]; }
+
+void Matrix::Z_setter(int j, double value) {
+	values[0][j] = value;
+}
+void Matrix::values_setter(int i, int j, double value) {
+	values[i][j] = value;
+}
+
 
 //user input functions
 int Matrix::restrictions() {
@@ -49,12 +63,8 @@ void Matrix::print_matrix() {
 		std::cout << std::endl;
 	}
 }
-int Matrix::get_rows() {
-	return Matrix::rest + 1;
-}
-int Matrix::get_cols(int r) {
-	return Matrix::vars + r;
-}
+int Matrix::aux_rows() { return Matrix::rest + 1; }
+int Matrix::aux_cols(int r) { return Matrix::vars + r; }
 
 void Matrix::init_matrix() {
 	for (int i = 0; i < rows; i++) {
@@ -62,10 +72,12 @@ void Matrix::init_matrix() {
 	}
 }
 
-//Objetive
+//Objetive: En este punto se define si la funcion es de maximizar o minimizar, pero como el metodo simplex 
+//solo trabaja con maximizar, se puede implementar el metodo de la gran M para convertir las funciones de 
+//minimizacion en funciones de maximización.
 std::string Matrix::objetive() {
 	int aux_obj;
-	std::cout << "Objetive [1] Max or [2] Min: ";
+	std::cout << "Objetive [1] Max or [2] Min (Using Big M Method): ";
 	std::cin >> aux_obj;
 	std::string objt = (aux_obj == 1) ? "Max" : "Min";
 	return objt;
