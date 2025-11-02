@@ -1,10 +1,12 @@
 ﻿#include <iostream>
 #include "MethodLogic.h"
 
+//Define the new matrix for the simplex method
 void redefine_matrix(Matrix m){
 	define_z(m);
 	fill_slack(m);
 	m.print_matrix();
+	simplex(m);
 }
 void define_z(Matrix m){
 	for (int j = 0; j < m.vars; j++) {
@@ -29,3 +31,25 @@ void fill_i(Matrix m) {
 		fill_j(i, m);
 	}
 }
+
+void simplex(Matrix m) {
+	double** mat_new = m.get_matrix();
+	int col = det_piv_column(mat_new, m);
+	int row = det_piv_row(mat_new, m, col);
+	std::cout << col << std::endl;
+	std::cout << row << std::endl;
+
+	std::cout << mat_new[row][col] << std::endl;
+}
+int det_piv_column(double** mat_new, Matrix m) {
+	double min = mat_new[0][0];
+	int b = 0;
+	for (int j = 1; j < m.vars; j++) {
+		if (mat_new[0][j] < min) {
+			min = mat_new[0][j];
+			b = j;
+		}
+	}
+	return b;
+}
+

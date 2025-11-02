@@ -19,8 +19,8 @@ Matrix::Matrix() {
 
 //Getters and Setters
 double** Matrix::get_matrix(){ return Matrix::values; }
-int Matrix::cols_getter() { return Matrix::cols; }
-int Matrix::rows_getter() { return Matrix::rows; }
+int Matrix::cols_getter() const { return Matrix::cols; }
+int Matrix::rows_getter() const { return Matrix::rows; }
 double Matrix::Z_getter(int j) { return Matrix::func_Z[j]; }
 
 void Matrix::Z_setter(int j, double value) {
@@ -63,8 +63,8 @@ void Matrix::print_matrix() {
 		std::cout << std::endl;
 	}
 }
-int Matrix::aux_rows() { return Matrix::rest + 1; }
-int Matrix::aux_cols(int r) { return Matrix::vars + r; }
+int Matrix::aux_rows() const{ return Matrix::rest + 1; }
+int Matrix::aux_cols(int r) const{ return Matrix::vars + r; }
 
 void Matrix::init_matrix() {
 	for (int i = 0; i < rows; i++) {
