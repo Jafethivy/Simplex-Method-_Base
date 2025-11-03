@@ -3,9 +3,9 @@
 
 //constructor
 Matrix::Matrix() {
-	rest = Matrix::restrictions();
-	vars = Matrix::varibles();
-	objt = Matrix::objetive();
+	rest = 3;
+	vars = 3;
+	objt = "a";
 	rows = Matrix::aux_rows();
 	cols = Matrix::aux_cols(rows);
 
@@ -22,6 +22,7 @@ double** Matrix::get_matrix(){ return Matrix::values; }
 int Matrix::cols_getter() const { return Matrix::cols; }
 int Matrix::rows_getter() const { return Matrix::rows; }
 double Matrix::Z_getter(int j) { return Matrix::func_Z[j]; }
+double Matrix::get_value(int i, int j) { return Matrix::values[i][j]; }
 
 void Matrix::Z_setter(int j, double value) {
 	values[0][j] = value;
@@ -85,22 +86,24 @@ std::string Matrix::objetive() {
 
 //Objetive function
 void Matrix::obj_function() {
+	int n = 1;
 	for (int i = 0; i < vars; i++) {
-		std::cout << "Enter the coefficient for x" << i + 1 << ": ";
-		std::cin >> func_Z[i];
+		//std::cout << "Enter the coefficient for x" << i + 1 << ": ";
+		//std::cin >> func_Z[i];
+		func_Z[i] = n;
+		n++;
 	}
 }
 
 //Define restrictions
 void Matrix::define_rest() {
-	std::cout << "Define the restrictions:" << std::endl;
+	int n = 0;
 	for (int i = 0; i < rest; i++) {
-		std::cout << "Restriction " << i + 1 << ":" << std::endl;
 		for (int j = 0; j < vars; j++) {
-			std::cout << "Enter the coefficient for x" << j + 1 << ": ";
-			std::cin >> values[i+1][j];
+			values[i+1][j] = n;
+			n++;
 		}
-		std::cout << "Enter the result value: ";
-		std::cin >> values[i+1][cols - 1];
+		values[i+1][cols - 1] = 40;
+		
 	}
 }

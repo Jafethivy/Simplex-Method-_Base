@@ -21,6 +21,7 @@ public:
 	int cols_getter() const;
 	int rows_getter() const;
 	double Z_getter(int j);
+	double get_value(int i, int j);
 
 	void Z_setter(int j, double value);
 	void values_setter(int i, int j, double value);

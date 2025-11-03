@@ -7,7 +7,20 @@ void redefine_matrix(Matrix m){
 	fill_slack(m);
 	m.print_matrix();
 	simplex(m);
+	std::cout << "After pivoting: " << std::endl;
+	m.print_matrix();
 }
+void simplex(Matrix m) {
+	pivoting(m);
+}
+void pivoting(Matrix m) {
+	int piv_col = det_piv_column(m);
+	int piv_row = det_piv_row(m, piv_col);
+	std::cout << m.get_matrix()[piv_row][piv_col]<< std::endl;
+	std::cout << piv_col << " x " << piv_row << std::endl;
+	//row_iterate(m, piv_col, piv_row);
+}
+
 void define_z(Matrix m){
 	for (int j = 0; j < m.vars; j++) {
 		m.Z_setter(j, -(m.Z_getter(j)));
@@ -32,24 +45,38 @@ void fill_i(Matrix m) {
 	}
 }
 
-void simplex(Matrix m) {
-	double** mat_new = m.get_matrix();
-	int col = det_piv_column(mat_new, m);
-	int row = det_piv_row(mat_new, m, col);
-	std::cout << col << std::endl;
-	std::cout << row << std::endl;
-
-	std::cout << mat_new[row][col] << std::endl;
-}
-int det_piv_column(double** mat_new, Matrix m) {
-	double min = mat_new[0][0];
+int det_piv_column(Matrix m) {
+	double min = m.get_value(0,0);
 	int b = 0;
 	for (int j = 1; j < m.vars; j++) {
-		if (mat_new[0][j] < min) {
-			min = mat_new[0][j];
+		if (m.get_value(0, j) < min) {
+			min = m.get_value(0, j);
 			b = j;
 		}
 	}
 	return b;
 }
+int det_piv_row(Matrix m, int piv_col) {
+	double row_min = m.get_value(1,piv_col);
+	double res_min = m.get_value(1,m.cols_getter() - 1);
+	double val_min = res_min / row_min;
+	int a = 1;
+	for (int i = 2; i <= m.rest; i++) {
+		double row_min_t = m.get_value(1, piv_col);
+		double res_min_t = m.get_value(1, m.cols_getter() - 1);
+		double val_min_t = res_min_t / row_min_t;
+		if (val_min_t < val_min) {
+			val_min = val_min_t;
+			a = i;
+		}
+	}
+	return a;
+}
 
+void row_iterate(Matrix m, int piv_col, int piv_row) {
+	double piv_value = m.get_value(piv_row, piv_col);
+	for (int j = 0; j < m.cols_getter(); j++) {
+		double new_value = m.get_value(piv_row, j) / piv_value;
+		m.values_setter(piv_row, j, new_value);
+	}
+}
