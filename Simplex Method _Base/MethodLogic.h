@@ -13,4 +13,7 @@ void fill_j(int i, Matrix m);
 int det_piv_column(Matrix m);
 int det_piv_row(Matrix m, int piv_col);
 
-void row_iterate(Matrix m, int piv_col, int piv_row);
+void row_pivot_iterate(Matrix m, int piv_row, int piv_col);
+void col_iterate(Matrix m, int piv_row, int piv_col);
+
+bool optimal_solution(Matrix m);

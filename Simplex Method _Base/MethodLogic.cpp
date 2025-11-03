@@ -11,14 +11,15 @@ void redefine_matrix(Matrix m){
 	m.print_matrix();
 }
 void simplex(Matrix m) {
-	pivoting(m);
+	while (!optimal_solution(m)) {
+		pivoting(m);
+	}
 }
 void pivoting(Matrix m) {
 	int piv_col = det_piv_column(m);
 	int piv_row = det_piv_row(m, piv_col);
-	std::cout << m.get_matrix()[piv_row][piv_col]<< std::endl;
-	std::cout << piv_col << " x " << piv_row << std::endl;
-	//row_iterate(m, piv_col, piv_row);
+	row_pivot_iterate(m, piv_row, piv_col);
+	col_iterate(m, piv_row, piv_col);
 }
 
 void define_z(Matrix m){
@@ -48,7 +49,7 @@ void fill_i(Matrix m) {
 int det_piv_column(Matrix m) {
 	double min = m.get_value(0,0);
 	int b = 0;
-	for (int j = 1; j < m.vars; j++) {
+	for (int j = 1; j < m.cols_getter(); j++) {
 		if (m.get_value(0, j) < min) {
 			min = m.get_value(0, j);
 			b = j;
@@ -62,8 +63,8 @@ int det_piv_row(Matrix m, int piv_col) {
 	double val_min = res_min / row_min;
 	int a = 1;
 	for (int i = 2; i <= m.rest; i++) {
-		double row_min_t = m.get_value(1, piv_col);
-		double res_min_t = m.get_value(1, m.cols_getter() - 1);
+		double row_min_t = m.get_value(i, piv_col);
+		double res_min_t = m.get_value(i, m.cols_getter() - 1);
 		double val_min_t = res_min_t / row_min_t;
 		if (val_min_t < val_min) {
 			val_min = val_min_t;
@@ -73,10 +74,30 @@ int det_piv_row(Matrix m, int piv_col) {
 	return a;
 }
 
-void row_iterate(Matrix m, int piv_col, int piv_row) {
+void row_pivot_iterate(Matrix m, int piv_row, int piv_col) {
 	double piv_value = m.get_value(piv_row, piv_col);
 	for (int j = 0; j < m.cols_getter(); j++) {
 		double new_value = m.get_value(piv_row, j) / piv_value;
 		m.values_setter(piv_row, j, new_value);
 	}
+}
+void col_iterate(Matrix m, int piv_row, int piv_col) {
+	for (int i = 0; i < m.rest; i++) {
+		double multiplier = m.get_value(i, piv_col);
+		if (i == piv_row) { continue; }
+		for (int j = 0; j < m.cols_getter(); j++) {
+			double pivoted_value = m.get_value(piv_row, j);
+			double new_value = m.get_value(i, j) - (multiplier * pivoted_value);
+			m.values_setter(i, j, new_value);
+		}
+	}
+}
+
+bool optimal_solution(Matrix m) {
+	for (int j = 0; j < m.cols_getter() - 1; j++) {
+		if (m.get_value(0, j) < 0) {
+			return false;
+		}
+	}
+	return true;
 }
