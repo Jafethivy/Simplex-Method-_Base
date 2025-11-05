@@ -11,9 +11,7 @@ void redefine_matrix(Matrix m){
 	m.print_matrix();
 }
 void simplex(Matrix m) {
-	while (!optimal_solution(m)) {
-		pivoting(m);
-	}
+	pivoting(m);
 }
 void pivoting(Matrix m) {
 	int piv_col = det_piv_column(m);
@@ -31,7 +29,6 @@ void define_z(Matrix m){
 	}
 }
 void fill_slack(Matrix m) {
-	double** value = m.get_matrix();
 	fill_i(m);
 }
 void fill_j(int i, Matrix m) {
@@ -82,9 +79,9 @@ void row_pivot_iterate(Matrix m, int piv_row, int piv_col) {
 	}
 }
 void col_iterate(Matrix m, int piv_row, int piv_col) {
-	for (int i = 0; i < m.rest; i++) {
+	for (int i = 1; i <= m.rest; i++) {
 		double multiplier = m.get_value(i, piv_col);
-		if (i == piv_row) { continue; }
+		if (i == piv_row ) { continue; }
 		for (int j = 0; j < m.cols_getter(); j++) {
 			double pivoted_value = m.get_value(piv_row, j);
 			double new_value = m.get_value(i, j) - (multiplier * pivoted_value);
