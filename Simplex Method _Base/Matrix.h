@@ -28,7 +28,7 @@ public:
 	
 	//user input functions
 	int restrictions();
-	int varibles();
+	int variables();
 
 	//auxiliary functions
 	void print_info();

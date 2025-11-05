@@ -3,8 +3,9 @@
 
 //constructor
 Matrix::Matrix() {
-	rest = 3;
-	vars = 3;
+	rest = restrictions();
+	vars = variables();
+	objt = "";
 	rows = Matrix::aux_rows();
 	cols = Matrix::aux_cols(rows);
 
@@ -38,11 +39,18 @@ int Matrix::restrictions() {
 	std::cin >> rest;
 	return rest;
 }
-int Matrix::varibles() {
+int Matrix::variables() {
 	int var;
 	std::cout << "Enter the number of varibles: ";
 	std::cin >> var;
 	return var;
+}
+std::string Matrix::objetive() {
+	int aux_obj;
+	std::cout << "Objetive [1] Max or [2] Min (Using Big M Method): ";
+	std::cin >> aux_obj;
+	std::string objt = (aux_obj == 1) ? "Max" : "Min";
+	return objt;
 }
 
 //auxiliary functions
@@ -74,24 +82,25 @@ void Matrix::init_matrix() {
 
 //Objetive function
 void Matrix::obj_function() {
-	int n = 1;
+	//int n = 1;
 	for (int i = 0; i < vars; i++) {
-		//std::cout << "Enter the coefficient for x" << i + 1 << ": ";
-		//std::cin >> func_Z[i];
-		func_Z[i] = n;
-		n++;
+		std::cout << "Enter the coefficient for x" << i + 1 << ": ";
+		std::cin >> func_Z[i];
+		//func_Z[i] = n;
+		//n++;
 	}
 }
 
 //Define restrictions
 void Matrix::define_rest() {
-	int n = 0;
+	std::cout << "Define the restrictions:" << std::endl;
 	for (int i = 0; i < rest; i++) {
+		std::cout << "Restriction " << i + 1 << ":" << std::endl;
 		for (int j = 0; j < vars; j++) {
-			values[i+1][j] = n;
-			n++;
+			std::cout << "Enter the coefficient for x" << j + 1 << ": ";
+			std::cin >> values[i + 1][j];
 		}
-		values[i+1][cols - 1] = 40;
-		
+		std::cout << "Enter the result value: ";
+		std::cin >> values[i + 1][cols - 1];
 	}
 }
