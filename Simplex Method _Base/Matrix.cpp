@@ -5,7 +5,6 @@
 Matrix::Matrix() {
 	rest = 3;
 	vars = 3;
-	objt = "a";
 	rows = Matrix::aux_rows();
 	cols = Matrix::aux_cols(rows);
 
@@ -71,17 +70,6 @@ void Matrix::init_matrix() {
 	for (int i = 0; i < rows; i++) {
 		Matrix::values[i] = new double[cols];
 	}
-}
-
-//Objetive: En este punto se define si la funcion es de maximizar o minimizar, pero como el metodo simplex 
-//solo trabaja con maximizar, se puede implementar el metodo de la gran M para convertir las funciones de 
-//minimizacion en funciones de maximización.
-std::string Matrix::objetive() {
-	int aux_obj;
-	std::cout << "Objetive [1] Max or [2] Min (Using Big M Method): ";
-	std::cin >> aux_obj;
-	std::string objt = (aux_obj == 1) ? "Max" : "Min";
-	return objt;
 }
 
 //Objetive function
