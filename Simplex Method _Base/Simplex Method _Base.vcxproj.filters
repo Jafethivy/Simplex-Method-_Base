@@ -13,23 +13,32 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de origen\Method">
+      <UniqueIdentifier>{8929fec0-71ce-4dcc-b1c4-c2c169481aed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Simplex Method _Base.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Maximize.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Maximization.cpp">
+      <Filter>Archivos de origen\Method</Filter>
+    </ClCompile>
+    <ClCompile Include="Minimization.cpp">
+      <Filter>Archivos de origen\Method</Filter>
+    </ClCompile>
+    <ClCompile Include="Simplex Method _Base.cpp">
+      <Filter>Archivos de origen\Method</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Matrix.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Maximize.h">
+    <ClInclude Include="Maximization.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Minimization.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
