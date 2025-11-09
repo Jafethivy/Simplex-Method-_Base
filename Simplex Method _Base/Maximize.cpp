@@ -5,11 +5,10 @@ void start_maximization(Matrix& m) {
 	define_z(m);
 	fill_slack(m);
 	m.print_matrix();
-	pivoting(m);
-	std::cout << "\nAfter pivoting:\n";
-	m.print_matrix();
-	pivoting(m);
-	std::cout << "\nAfter pivoting:\n";
+	while (optimal_solution(m) == false) {
+		pivoting(m);
+	}
+	std::cout << "\nOptimal solution reached:\n";
 	m.print_matrix();
 }
 
@@ -18,7 +17,6 @@ void pivoting(Matrix& m) {
 	int piv_row = det_piv_row(m, piv_col);
 	row_pivot_iterate(m, piv_row, piv_col);
 	col_iterate(m, piv_row, piv_col);
-	std::cout << "\nPivot Column: " << piv_col << ", Pivot Row: " << piv_row << "\n";
 }
 
 void define_z(Matrix& m){ // funciona
@@ -41,8 +39,8 @@ void fill_i(Matrix& m) {
 	}
 }
 
-int det_piv_column(Matrix& m) {
-	int piv_col = -1;
+int det_piv_column(Matrix& m) { // funciona
+	int piv_col = 0;
 	double most_neg = 0;
 	for (int j = 0; j < m.cols_getter() - 1; j++) {
 		if (m.get_value(0, j) < most_neg) {
@@ -53,15 +51,14 @@ int det_piv_column(Matrix& m) {
 	return piv_col;
 }
 int det_piv_row(Matrix& m, int piv_col) {
-	int piv_row = -1;
-	double val_min = m.get_value(1,6) / m.get_value(1,piv_col);
+	int piv_row = 1;
+	const int it_cols = m.cols_getter() - 1;
+	double val_min = m.get_value(1,it_cols) / m.get_value(1,piv_col);
 	for (int i = 1; i < m.rows_getter(); i++) {
 		double denom = m.get_value(i, piv_col);
 		if (denom <= 0) continue;
-
-		if (m.get_value(i,6) / m.get_value(i,piv_col) < val_min && m.get_value(i, piv_col) > 0) {
-			std::cout << "Row " << i << " - Value: " << m.get_value(i,6) / m.get_value(i, piv_col) << "\n";
-			val_min = m.get_value(i,6) / m.get_value(i,piv_col);
+		if (m.get_value(i,it_cols) / m.get_value(i,piv_col) < val_min) {
+			val_min = m.get_value(i,it_cols) / m.get_value(i,piv_col);
 			piv_row = i;
 		}
 	}
@@ -88,7 +85,7 @@ void col_iterate(Matrix& m, int piv_row, int piv_col) {
 }
 
 bool optimal_solution(Matrix& m) {
-	for (int j = 0; j < m.cols_getter(); j++) {
+	for (int j = 0; j < m.cols_getter() - 1; j++) {
 		if (m.get_value(0, j) < 0) {
 			return false;
 		}
