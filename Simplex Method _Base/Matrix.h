@@ -1,51 +1,38 @@
 ﻿#pragma once
+#include <vector>
 #include <string>
 
-class Matrix{
+class Matrix {
 private:
-	int rows, cols;
-	std::string objt;
+    std::vector<double> tabla;
+    std::vector<double> funcZ;
+    int rows, cols, variables, restrictions;
+    std::string objetive;
 
-	double** values;
-	double* func_Z;
+    // Acceso interno inline
+    inline double& at_a(int i, int j);
+    inline const double& at_b(int i, int j) const;
 
 public:
-	int rest, vars;
-	std::string size;
+    //Constructor
+    explicit Matrix(int n_vars, int n_rest, const std::string& obj);
 
-	//constructor
-	Matrix();
+    //Getters
+    [[nodiscard]] int cols_getter() const noexcept;
+    [[nodiscard]] int rows_getter() const noexcept;
+    [[nodiscard]] int vars_getter() const noexcept;
+    [[nodiscard]] int rest_getter() const noexcept;
+    [[nodiscard]] double Z_getter(int j) const;
+    [[nodiscard]] double get_value(int i, int j) const;
 
-	//Getters and Setters
-	double** get_matrix();
-	int cols_getter() const;
-	int rows_getter() const;
-	double Z_getter(int j);
-	double get_value(int i, int j);
+    // Setters
+    void Z_setter(int j, double value);
+    void values_setter(int i, int j, double value);
 
-	void Z_setter(int j, double value);
-	void values_setter(int i, int j, double value);
-	
-	//user input functions
-	int restrictions();
-	int varibles();
+    // Carga de datos (separada de constructor)
+    void set_objetive_function(const std::vector<double>& coefs);
+    void set_restrictions(int idx, const std::vector<double>& coefs, double result);
 
-	//auxiliary functions
-	void print_info();
-	void print_matrix();
-
-	int aux_rows() const;
-	int aux_cols(int r) const;
-
-	void init_matrix();
-
-	//Objetive
-	std::string objetive();
-
-	//Objetive function
-	void obj_function();
-
-	//Define restrictions
-	void define_rest();
+    // Utilidades
+    void print_matrix() const;
 };
-
