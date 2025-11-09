@@ -1,11 +1,11 @@
 ﻿#include <iostream>
-#include "Maximize.h"
+#include "Maximization.h"
 
 void start_maximization(Matrix& m) {
 	define_z(m);
 	fill_slack(m);
 	m.print_matrix();
-	while (optimal_solution(m) == false) {
+	while (!optimal_solution(m)) {
 		pivoting(m);
 	}
 	std::cout << "\nOptimal solution reached:\n";

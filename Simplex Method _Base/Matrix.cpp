@@ -8,18 +8,21 @@ Matrix::Matrix(int n_vars, int n_rest, const std::string& obj){
     restrictions = n_rest;
     rows = n_rest + 1;
     cols = n_vars + rows;
-    tabla.resize(rows * cols, 0);
+    size_t total_size = static_cast<size_t>(rows) * static_cast<size_t>(cols);
+    tabla.resize(total_size, 0);
     funcZ.resize(variables);
     objetive = obj;
 }
 
 // Para setter
 inline double& Matrix::at_a(int i, int j) {
-    return tabla[i * cols + j];
+    size_t index = static_cast<size_t>(i);
+    return tabla[index * cols + j];
 }
 // Para getter
 inline const double& Matrix::at_b(int i, int j) const {
-    return tabla[i * cols + j];
+    size_t index = static_cast<size_t>(i);
+    return tabla[index * cols + j];
 }
 
 // Getters simples
