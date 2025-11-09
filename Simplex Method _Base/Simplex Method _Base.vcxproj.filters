@@ -21,7 +21,7 @@
     <ClCompile Include="Matrix.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="MethodLogic.cpp">
+    <ClCompile Include="Maximize.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClInclude Include="Matrix.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="MethodLogic.h">
+    <ClInclude Include="Maximize.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
