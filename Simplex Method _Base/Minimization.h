@@ -5,7 +5,6 @@ void start_minimization(Matrix& m);
 
 void pivoting(Matrix& m);
 
-void define_z(Matrix& m);
 void fill_slack(Matrix& m);
 void fill_i(Matrix& m);
 void fill_j(int i, Matrix& m);
