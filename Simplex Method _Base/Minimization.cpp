@@ -2,7 +2,6 @@
 #include "Minimization.h"
 
 void start_minimization(Matrix& m) {
-	define_z(m);
 	fill_slack(m);
 	m.print_matrix();
 	while (!optimal_solution(m)) {
@@ -19,11 +18,6 @@ void pivoting(Matrix& m) {
 	col_iterate(m, piv_row, piv_col);
 }
 
-void define_z(Matrix& m) { // funciona
-	for (int j = 0; j < m.vars_getter(); j++) {
-		m.Z_setter(j, -m.Z_getter(j));
-	}
-}
 void fill_slack(Matrix& m) { // funciona
 	fill_i(m);
 }
