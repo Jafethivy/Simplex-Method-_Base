@@ -54,11 +54,13 @@ int det_piv_row(Matrix& m, int piv_col) {
 	int piv_row = 1;
 	const int it_cols = m.cols_getter() - 1;
 	double val_min = m.get_value(1,it_cols) / m.get_value(1,piv_col);
+	if (val_min < 0) {
+		val_min = std::numeric_limits<double>::infinity();
+	}
 	for (int i = 1; i < m.rows_getter(); i++) {
-		double denom = m.get_value(i, piv_col);
-		if (denom <= 0) continue;
-		if (m.get_value(i,it_cols) / m.get_value(i,piv_col) < val_min) {
-			val_min = m.get_value(i,it_cols) / m.get_value(i,piv_col);
+		double ratio = m.get_value(i, it_cols) / m.get_value(i, piv_col);
+		if (ratio < val_min && ratio >= 0) {
+			val_min = ratio;
 			piv_row = i;
 		}
 	}
