@@ -40,14 +40,15 @@ int main() {
         m.set_restrictions(i, coefs_rest, resultado);
     }
 
-	start_maximization(m); */
-    
-    Matrix m(3, 3, "max");
-    m.set_objetive_function({ 3, 2, 5 });
-    m.set_restrictions(0, { 2, 1, 1 }, 430);
-    m.set_restrictions(1, { 1, 2, 1 }, 460);
-    m.set_restrictions(2, { 1, 1, 3 }, 420);
+	start_maximization(m);
+    */
+    //*
+    Matrix m(2, 3, "max");
+    m.set_objetive_function({ 3, 2});
+    m.set_restrictions(0, { 2, 1}, 18);
+    m.set_restrictions(1, { 2, 3}, 42);
+    m.set_restrictions(2, { 3, 1}, 24);
 	start_maximization(m); // cambien manualmente por start_minimization(m); para minimizacion
     return 0;
-    
+    //*/
 }
