@@ -16,19 +16,22 @@
     <Filter Include="Archivos de origen\Method">
       <UniqueIdentifier>{8929fec0-71ce-4dcc-b1c4-c2c169481aed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Method">
+      <UniqueIdentifier>{b7d82df1-c4ef-47d1-9618-d2c3d91d18a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Maximization.cpp">
       <Filter>Archivos de origen\Method</Filter>
     </ClCompile>
     <ClCompile Include="Minimization.cpp">
       <Filter>Archivos de origen\Method</Filter>
     </ClCompile>
-    <ClCompile Include="Simplex Method _Base.cpp">
+    <ClCompile Include="Matrix.cpp">
       <Filter>Archivos de origen\Method</Filter>
+    </ClCompile>
+    <ClCompile Include="Simplex Method _Base.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -36,10 +39,10 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Maximization.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Method</Filter>
     </ClInclude>
     <ClInclude Include="Minimization.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Method</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
