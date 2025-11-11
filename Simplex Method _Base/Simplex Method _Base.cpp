@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "Matrix.h"
 #include "Maximization.h"
+#include "Minimization.h"
 
 
 int main() {
@@ -48,7 +49,8 @@ int main() {
     m.set_restrictions(0, { 2, 1}, 18);
     m.set_restrictions(1, { 2, 3}, 42);
     m.set_restrictions(2, { 3, 1}, 24);
-	start_maximization(m); // cambien manualmente por start_minimization(m); para minimizacion
+	start_maximization(m);
+    start_minimization_min(m);
     return 0;
     //*/
 }
